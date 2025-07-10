@@ -11,14 +11,12 @@ function App() {
   const [notifiedTaskIds, setNotifiedTaskIds] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
 
-  // Notification permission
   useEffect(() => {
     if ("Notification" in window && Notification.permission !== "granted") {
       Notification.requestPermission();
     }
   }, []);
 
-  // Decode token + get email
   useEffect(() => {
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
@@ -124,6 +122,15 @@ function App() {
     minHeight: '100vh',
     padding: '2rem',
     fontFamily: 'system-ui, sans-serif',
+    position: 'relative',
+  };
+
+  const iconStyle = {
+    position: 'absolute',
+    top: '1rem',
+    right: '1rem',
+    fontSize: '1.5rem',
+    cursor: 'pointer',
   };
 
   const inputStyle = {
@@ -147,10 +154,12 @@ function App() {
   return (
     <GoogleOAuthProvider clientId="619081886304-gjv69j78mqvau459g7taeehja7jto3pb.apps.googleusercontent.com">
       <div style={appStyle}>
+        {/* 🌙 Light/Dark Toggle in Top-Right */}
+        <span onClick={() => setDarkMode(!darkMode)} style={iconStyle}>
+          {darkMode ? '☀️' : '🌙'}
+        </span>
+
         <h1 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>⏰ Reminder App</h1>
-        <button onClick={() => setDarkMode(!darkMode)} style={{ ...buttonStyle, backgroundColor: '#6b7280' }}>
-          Toggle {darkMode ? '☀️ Light' : '🌙 Dark'} Mode
-        </button>
 
         {!isLoggedIn ? (
           <div style={{ marginTop: '1rem' }}>
