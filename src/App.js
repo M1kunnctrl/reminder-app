@@ -154,7 +154,6 @@ function App() {
   return (
     <GoogleOAuthProvider clientId="619081886304-gjv69j78mqvau459g7taeehja7jto3pb.apps.googleusercontent.com">
       <div style={appStyle}>
-        {/* 🌙 Light/Dark Toggle in Top-Right */}
         <span onClick={() => setDarkMode(!darkMode)} style={iconStyle}>
           {darkMode ? '☀️' : '🌙'}
         </span>
