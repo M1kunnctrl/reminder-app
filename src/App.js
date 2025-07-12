@@ -44,16 +44,17 @@ function App() {
 
   const sendEmailReminder = useCallback((task) => {
     const templateParams = {
-      task_name: task.name,
-      due_time: new Date(task.time).toLocaleString(),
-      to_email: userEmail, // dynamically sent to logged-in user
+      to_email: userEmail,
+      name: task.name,
+      time: new Date(task.time).toLocaleString(),
+      message: "This is your scheduled reminder from the Reminder App. Stay productive! 🚀"
     };
 
     emailjs.send(
-      'service_ub5zfzq',         // your EmailJS service ID
-      'template_nbhstdp',        // your template ID
+      'service_ub5zfzq',
+      'template_nbhstdp',
       templateParams,
-      'VuvKgZynHbofGPr3I'        // your public key
+      'VuvKgZynHbofGPr3I'
     ).then(() => console.log("📧 Email sent"))
      .catch((err) => console.error("Email error:", err));
   }, [userEmail]);
