@@ -46,15 +46,16 @@ function App() {
     const templateParams = {
       task_name: task.name,
       due_time: new Date(task.time).toLocaleString(),
-      to_email: userEmail,
+      to_email: userEmail, // dynamically sent to logged-in user
     };
 
     emailjs.send(
-      'service_ub5zfzq',
-      'template_nbhstdp',
+      'service_ub5zfzq',         // your EmailJS service ID
+      'template_nbhstdp',        // your template ID
       templateParams,
-      'VuvKgZynHbofGPr3I'
-    ).then(() => console.log("📧 Email sent"));
+      'VuvKgZynHbofGPr3I'        // your public key
+    ).then(() => console.log("📧 Email sent"))
+     .catch((err) => console.error("Email error:", err));
   }, [userEmail]);
 
   useEffect(() => {
